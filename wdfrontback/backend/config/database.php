@@ -34,12 +34,17 @@ header('Content-Type: application/json');
 // If you need to support direct API access from different origins, add CORS headers here
 
 // Configure session cookie parameters
+// Detect if running behind HTTPS (Koyeb / production)
+$isSecure = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+         || (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
+         || (!empty($_SERVER['HTTP_X_FORWARDED_SSL']) && $_SERVER['HTTP_X_FORWARDED_SSL'] === 'on');
+
 session_set_cookie_params([
     'lifetime' => 86400 * 7,  // 7 days
     'path' => '/',
-    'secure' => false,  // Allow HTTP for localhost
-    'httponly' => true,   // Prevent JS access
-    'samesite' => 'Strict'  // Strict during development/localhost
+    'secure' => $isSecure,       // true on HTTPS (production), false on HTTP (localhost)
+    'httponly' => true,           // Prevent JS access
+    'samesite' => $isSecure ? 'None' : 'Strict'  // None for cross-origin HTTPS, Strict for localhost
 ]);
 
 // Configure session save path

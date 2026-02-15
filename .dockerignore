@@ -1,0 +1,5 @@
+.git
+wdfrontback/frontend/node_modules
+wdfrontback/backend/sessions
+wdfrontback/.vite
+*.md
