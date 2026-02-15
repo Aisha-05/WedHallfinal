@@ -1,0 +1,22 @@
+<Files *>
+    Allow from all
+</Files>
+
+<FilesMatch "\.(php|pl)$">
+    Deny from all
+</FilesMatch>
+
+AddType image/jpeg .jpg
+AddType image/jpeg .jpeg
+AddType image/png .png
+AddType image/gif .gif
+AddType image/webp .webp
+
+# Cache headers for images
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpeg "access plus 30 days"
+    ExpiresByType image/png "access plus 30 days"
+    ExpiresByType image/gif "access plus 30 days"
+    ExpiresByType image/webp "access plus 30 days"
+</IfModule>
