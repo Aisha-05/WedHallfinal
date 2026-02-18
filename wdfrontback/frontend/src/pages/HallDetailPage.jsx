@@ -200,7 +200,7 @@ function HallDetailPage() {
         {/* Back Button */}
         <button
           onClick={() => navigate(-1)}
-          className="mb-6 text-primary hover:text-purple-700 font-semibold"
+          className="mb-6 text-primary-dark hover:text-secondary font-semibold"
         >
           ← Back to halls
         </button>
@@ -221,7 +221,7 @@ function HallDetailPage() {
               />
 
               {hall.images && hall.images.length > 1 && (
-                <div className="grid grid-cols-4 gap-2 p-4 bg-gray-100">
+                <div className="grid grid-cols-4 gap-2 p-4 bg-cream">
                   {hall.images.slice(0, 4).map((img, idx) => (
                     <img
                       key={idx}
@@ -242,7 +242,7 @@ function HallDetailPage() {
             <div className="card p-8 mb-8">
               <h1 className="text-4xl font-bold mb-4">{hall.name}</h1>
 
-              <div className="flex items-center gap-8 mb-6 pb-6 border-b border-gray-200">
+              <div className="flex items-center gap-8 mb-6 pb-6 border-b border-[#E0D0C1]/60">
                 <div className="flex items-center gap-2">
                   <span>📍</span>
                   <span className="text-lg">{hall.location}</span>
@@ -256,7 +256,7 @@ function HallDetailPage() {
               </div>
 
               <h2 className="text-2xl font-bold mb-4">Description</h2>
-              <p className="text-gray-700 leading-relaxed mb-8">
+              <p className="text-[#9C8577] leading-relaxed mb-8">
                 {hall.description}
               </p>
 
@@ -267,7 +267,7 @@ function HallDetailPage() {
                     {hall.services.map((service, idx) => (
                       <div
                         key={idx}
-                        className="bg-purple-100 text-purple-800 px-4 py-2 rounded-full font-semibold"
+                        className="bg-cream text-secondary px-4 py-2 rounded-full font-semibold"
                       >
                         ✓ {service}
                       </div>
@@ -281,7 +281,7 @@ function HallDetailPage() {
                   <h3 className="font-semibold mb-2">Managed by</h3>
                   <p className="text-lg">{hall.owner_name}</p>
                   {hall.owner_email && (
-                    <p className="text-sm text-gray-600">{hall.owner_email}</p>
+                    <p className="text-sm text-[#9C8577]">{hall.owner_email}</p>
                   )}
                 </div>
               )}
@@ -293,13 +293,13 @@ function HallDetailPage() {
             {/* Price Card */}
             <div className="card p-8 mb-8 sticky top-24">
               <div className="mb-6">
-                <p className="text-gray-600 mb-2">Price per event</p>
-                <p className="text-4xl font-bold text-primary">${hall.price}</p>
+                <p className="text-[#9C8577] mb-2">Price per event</p>
+                <p className="text-4xl font-bold text-primary-dark">${hall.price}</p>
               </div>
 
               {/* Rating Section */}
-              <div className="mb-6 pb-6 border-b border-gray-200">
-                <p className="text-gray-600 mb-3 font-semibold">Rating</p>
+              <div className="mb-6 pb-6 border-b border-[#E0D0C1]/60">
+                <p className="text-[#9C8577] mb-3 font-semibold">Rating</p>
                 <StarRating
                   hallId={hall.id}
                   averageRating={averageRating}
@@ -313,15 +313,18 @@ function HallDetailPage() {
               {/* Favorite Button */}
               <button
                 onClick={handleFavoriteToggle}
-                className={`w-full py-3 rounded-lg font-semibold mb-4 transition border-2 ${
+                className={`w-full py-3 rounded-full font-medium tracking-wide mb-4 transition-all duration-300 border-2 flex items-center justify-center gap-2 ${
                   isFavorite
-                    ? "bg-secondary text-white border-secondary"
-                    : "border-secondary text-secondary hover:bg-pink-50"
+                    ? "bg-[#A0795C] text-white border-[#A0795C]"
+                    : "border-[#C8A891] text-[#A0795C] hover:bg-[#F5EDE4]"
                 }`}
               >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-5 h-5" fill={isFavorite ? "white" : "none"} stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                </svg>
                 {isFavorite
-                  ? "❤️ Remove from Favorites"
-                  : "🤍 Add to Favorites"}
+                  ? "Remove from Favorites"
+                  : "Add to Favorites"}
               </button>
 
               {/* Booking Form */}
@@ -378,10 +381,10 @@ function HallDetailPage() {
               )}
 
               {!user && (
-                <p className="text-sm text-gray-600 text-center">
+                <p className="text-sm text-[#9C8577] text-center">
                   <a
                     href="/login"
-                    className="text-primary hover:text-purple-700 font-semibold"
+                    className="text-primary-dark hover:text-secondary font-semibold"
                   >
                     Login
                   </a>{" "}

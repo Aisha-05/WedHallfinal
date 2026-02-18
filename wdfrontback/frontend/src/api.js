@@ -21,6 +21,8 @@ const endpointMap = {
   "/bookings/updateBooking.php": "bookings/update",
   "/ratings/getRatings.php": "ratings/get",
   "/ratings/submitRating.php": "ratings/submit",
+  "/auth/updateProfile.php": "auth/updateProfile",
+  "/auth/uploadProfilePicture.php": "auth/uploadProfilePicture",
 };
 
 // Helper function for safe JSON parsing
@@ -57,7 +59,7 @@ export const apiCall = async (endpoint, options = {}) => {
     queryString += "&" + queryParams;
   }
 
-  const response = await fetch(`${API_BASE_URL}/?${queryString}`, {
+  const response = await fetch(`${API_BASE_URL}?${queryString}`, {
     ...defaultOptions,
     ...options,
     headers: {

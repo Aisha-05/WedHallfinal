@@ -78,7 +78,7 @@ function ProfilePage() {
       <div className="max-w-2xl mx-auto px-4">
         <button
           onClick={() => window.history.back()}
-          className="mb-6 text-primary hover:text-purple-700 font-semibold"
+          className="mb-6 text-primary-dark hover:text-secondary font-semibold"
         >
           ← Back
         </button>
@@ -109,8 +109,8 @@ function ProfilePage() {
           )}
 
           {/* Profile Picture Section */}
-          <div className="mb-8 pb-8 border-b border-gray-200">
-            <label className="block text-sm font-semibold text-gray-600 mb-4">
+          <div className="mb-8 pb-8 border-b border-[#E0D0C1]/60">
+            <label className="block text-sm font-semibold text-[#9C8577] mb-4">
               Profile Picture
             </label>
             <div className="flex items-center gap-6">
@@ -121,7 +121,7 @@ function ProfilePage() {
                     "https://cdn.vectorstock.com/i/500p/29/52/faceless-male-avatar-in-hoodie-vector-56412952.jpg"
                   }
                   alt={user.name}
-                  className="w-24 h-24 rounded-full object-cover border-4 border-primary"
+                  className="w-24 h-24 rounded-full object-cover border-4 border-primary-dark"
                 />
               </div>
 
@@ -137,14 +137,14 @@ function ProfilePage() {
                   <span
                     className={`inline-block px-4 py-2 rounded-lg font-semibold transition ${
                       uploadingPicture
-                        ? "bg-gray-300 text-gray-600 cursor-not-allowed"
+                        ? "bg-[#E0D0C1] text-[#9C8577] cursor-not-allowed"
                         : "btn-primary"
                     }`}
                   >
                     {uploadingPicture ? "Uploading..." : "Change Picture"}
                   </span>
                 </label>
-                <p className="text-xs text-gray-500 mt-2">
+                <p className="text-xs text-[#B5A89E] mt-2">
                   JPG, PNG, GIF or WebP • Max 2MB
                 </p>
               </div>
@@ -168,33 +168,33 @@ function ProfilePage() {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-600 mb-2">
+                <label className="block text-sm font-semibold text-[#9C8577] mb-2">
                   Email (Read-only)
                 </label>
                 <input
                   type="email"
                   value={user.email}
                   disabled
-                  className="input-field bg-gray-100 cursor-not-allowed"
+                  className="input-field bg-cream cursor-not-allowed"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-600 mb-2">
+                <label className="block text-sm font-semibold text-[#9C8577] mb-2">
                   Account Type
                 </label>
                 <div className="flex items-center">
-                  <span className="bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold">
+                  <span className="bg-primary-dark text-white px-4 py-2 rounded-lg text-sm font-semibold">
                     Client
                   </span>
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-600 mb-2">
+                <label className="block text-sm font-semibold text-[#9C8577] mb-2">
                   Member Since
                 </label>
-                <p className="text-lg text-gray-700">
+                <p className="text-lg text-[#6B4F3A]">
                   {new Date(user.created_at).toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "long",
@@ -203,7 +203,7 @@ function ProfilePage() {
                 </p>
               </div>
 
-              <div className="flex gap-4 pt-6 border-t border-gray-200">
+              <div className="flex gap-4 pt-6 border-t border-[#E0D0C1]/60">
                 <button
                   type="submit"
                   disabled={loading}
@@ -226,33 +226,33 @@ function ProfilePage() {
             </form>
           ) : (
             <div className="space-y-6">
-              <div className="pb-6 border-b border-gray-200">
-                <label className="block text-sm font-semibold text-gray-600 mb-2">
+              <div className="pb-6 border-b border-[#E0D0C1]/60">
+                <label className="block text-sm font-semibold text-[#9C8577] mb-2">
                   Full Name
                 </label>
                 <p className="text-xl">{user.name}</p>
               </div>
 
-              <div className="pb-6 border-b border-gray-200">
-                <label className="block text-sm font-semibold text-gray-600 mb-2">
+              <div className="pb-6 border-b border-[#E0D0C1]/60">
+                <label className="block text-sm font-semibold text-[#9C8577] mb-2">
                   Email
                 </label>
                 <p className="text-xl">{user.email}</p>
               </div>
 
-              <div className="pb-6 border-b border-gray-200">
-                <label className="block text-sm font-semibold text-gray-600 mb-2">
+              <div className="pb-6 border-b border-[#E0D0C1]/60">
+                <label className="block text-sm font-semibold text-[#9C8577] mb-2">
                   Account Type
                 </label>
                 <p className="text-xl">
-                  <span className="bg-primary text-white px-3 py-1 rounded-full text-sm">
+                  <span className="bg-primary-dark text-white px-3 py-1 rounded-full text-sm">
                     Client
                   </span>
                 </p>
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-600 mb-2">
+                <label className="block text-sm font-semibold text-[#9C8577] mb-2">
                   Member Since
                 </label>
                 <p className="text-xl">
@@ -264,8 +264,8 @@ function ProfilePage() {
                 </p>
               </div>
 
-              <div className="mt-8 pt-8 border-t border-gray-200">
-                <p className="text-gray-600 text-sm">
+              <div className="mt-8 pt-8 border-t border-[#E0D0C1]/60">
+                <p className="text-[#9C8577] text-sm">
                   For account changes or support, please contact us at
                   support@wedhall.com
                 </p>

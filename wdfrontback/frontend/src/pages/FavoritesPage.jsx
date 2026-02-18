@@ -31,7 +31,7 @@ function FavoritesPage() {
     <div className="min-h-screen bg-light py-12">
       <div className="max-w-7xl mx-auto px-4">
         <h1 className="text-4xl font-bold mb-4">My Favorite Halls</h1>
-        <p className="text-gray-600 mb-12">Halls you've marked as favorite</p>
+        <p className="text-[#9C8577] mb-12">Halls you've marked as favorite</p>
 
         {loading ? (
           <div className="flex justify-center items-center py-12">
@@ -43,7 +43,7 @@ function FavoritesPage() {
           </div>
         ) : favorites.length === 0 ? (
           <div className="card p-12 text-center">
-            <p className="text-gray-600 text-lg mb-6">
+            <p className="text-[#9C8577] text-lg mb-6">
               You haven't added any favorites yet.
             </p>
             <a href="/halls" className="btn-primary inline-block">

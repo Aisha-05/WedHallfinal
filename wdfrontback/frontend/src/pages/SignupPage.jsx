@@ -76,7 +76,7 @@ function SignupPage() {
           <div className="text-center mb-8">
             <div className="text-4xl mb-4">💍</div>
             <h1 className="text-3xl font-bold">Join Wed Hall</h1>
-            <p className="text-gray-600 mt-2">
+            <p className="text-[#9C8577] mt-2">
               Create your account to get started
             </p>
           </div>
@@ -170,7 +170,7 @@ function SignupPage() {
             </button>
           </form>
 
-          <p className="text-center mt-6 text-gray-600">
+          <p className="text-center mt-6 text-[#9C8577]">
             Already have an account?{" "}
             <a
               href="/login"

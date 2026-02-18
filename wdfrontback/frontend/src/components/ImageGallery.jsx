@@ -35,7 +35,7 @@ function ImageGallery({ images, initialIndex = 0, onClose }) {
   }
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex flex-col">
+    <div className="fixed inset-0 bg-[#3E2A1C] bg-opacity-95 z-50 flex flex-col">
       {/* Close Button */}
       <div className="absolute top-4 right-4 z-10">
         <button
@@ -114,7 +114,7 @@ function ImageGallery({ images, initialIndex = 0, onClose }) {
       )}
 
       {/* Counter and Thumbnails */}
-      <div className="bg-black/50 p-4">
+      <div className="bg-[#3E2A1C]/60 p-4">
         {/* Counter */}
         <div className="text-center text-white mb-4 font-semibold">
           {currentIndex + 1} / {images.length}

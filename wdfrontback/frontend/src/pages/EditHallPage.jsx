@@ -139,7 +139,7 @@ function EditHallPage() {
       <div className="max-w-2xl mx-auto px-4">
         <button
           onClick={() => navigate(-1)}
-          className="mb-6 text-primary hover:text-purple-700 font-semibold"
+          className="mb-6 text-primary-dark hover:text-secondary font-semibold"
         >
           ← Back
         </button>
@@ -231,7 +231,7 @@ function EditHallPage() {
 
             <div>
               <label className="block text-sm font-semibold mb-2">Images</label>
-              <p className="text-gray-600 text-sm mb-4">Manage hall images</p>
+              <p className="text-[#9C8577] text-sm mb-4">Manage hall images</p>
 
               {formData.images.length > 0 && (
                 <div className="grid grid-cols-3 gap-4 mb-4">
@@ -269,9 +269,9 @@ function EditHallPage() {
             <div>
               <label className="block text-sm font-semibold mb-2">
                 Services{" "}
-                <span className="text-gray-500 text-xs">(Optional)</span>
+                <span className="text-[#B5A89E] text-xs">(Optional)</span>
               </label>
-              <p className="text-gray-600 text-sm mb-4">
+              <p className="text-[#9C8577] text-sm mb-4">
                 Add services provided by your hall
               </p>
 
@@ -281,13 +281,13 @@ function EditHallPage() {
                     {formData.services.map((service, idx) => (
                       <div
                         key={idx}
-                        className="bg-purple-100 text-purple-800 px-4 py-2 rounded-full flex items-center gap-2"
+                        className="bg-cream text-secondary px-4 py-2 rounded-full flex items-center gap-2"
                       >
                         <span>✓ {service}</span>
                         <button
                           type="button"
                           onClick={() => handleRemoveService(idx)}
-                          className="text-purple-600 hover:text-purple-800 font-semibold"
+                          className="text-primary-dark hover:text-secondary font-semibold"
                         >
                           ×
                         </button>

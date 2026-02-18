@@ -56,7 +56,7 @@ function LoginPage() {
           <div className="text-center mb-8">
             <div className="text-4xl mb-4">💍</div>
             <h1 className="text-3xl font-bold">Welcome Back</h1>
-            <p className="text-gray-600 mt-2">
+            <p className="text-[#9C8577] mt-2">
               Log in to your Wed Hall account
             </p>
           </div>
@@ -105,7 +105,7 @@ function LoginPage() {
             </button>
           </form>
 
-          <p className="text-center mt-6 text-gray-600">
+          <p className="text-center mt-6 text-[#9C8577]">
             Don't have an account?{" "}
             <a
               href="/signup"

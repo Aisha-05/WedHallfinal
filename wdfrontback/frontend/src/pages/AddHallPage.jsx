@@ -27,9 +27,21 @@ function AddHallPage() {
     }));
   };
 
+  const MAX_IMAGES = 5;
+
   const handleFileSelect = (e) => {
     const files = Array.from(e.target.files);
-    setSelectedFiles(files);
+    const remaining = MAX_IMAGES - formData.images.length;
+    if (remaining <= 0) {
+      setError(`Maximum ${MAX_IMAGES} images allowed. Remove an image first.`);
+      return;
+    }
+    if (files.length > remaining) {
+      setError(`You can only add ${remaining} more image${remaining === 1 ? '' : 's'}. Selected ${files.length}.`);
+      setSelectedFiles(files.slice(0, remaining));
+    } else {
+      setSelectedFiles(files);
+    }
     setUploadProgress(0);
   };
 
@@ -48,7 +60,7 @@ function AddHallPage() {
         formDataToSend.append("images[]", file);
       });
 
-      const response = await fetch("/backend/?route=halls/uploadImages", {
+      const response = await fetch("/backend/index.php?route=halls/uploadImages", {
         method: "POST",
         body: formDataToSend,
         credentials: "include",
@@ -71,10 +83,10 @@ function AddHallPage() {
       }
 
       if (data?.images && data.images.length > 0) {
-        setFormData((prev) => ({
-          ...prev,
-          images: [...prev.images, ...data.images],
-        }));
+        setFormData((prev) => {
+          const combined = [...prev.images, ...data.images];
+          return { ...prev, images: combined.slice(0, MAX_IMAGES) };
+        });
         setSelectedFiles([]);
         setUploadProgress(100);
         setTimeout(() => setUploadProgress(0), 2000);
@@ -91,6 +103,10 @@ function AddHallPage() {
   };
 
   const handleImageUrlAdd = () => {
+    if (formData.images.length >= MAX_IMAGES) {
+      setError(`Maximum ${MAX_IMAGES} images allowed. Remove an image first.`);
+      return;
+    }
     const imageUrl = prompt("Enter image URL:");
     if (imageUrl) {
       setFormData((prev) => ({
@@ -178,7 +194,7 @@ function AddHallPage() {
       <div className="max-w-2xl mx-auto px-4">
         <button
           onClick={() => navigate(-1)}
-          className="mb-6 text-primary hover:text-purple-700 font-semibold"
+          className="mb-6 text-primary-dark hover:text-secondary font-semibold"
         >
           ← Back
         </button>
@@ -274,13 +290,13 @@ function AddHallPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold mb-2">Images</label>
-              <p className="text-gray-600 text-sm mb-4">
-                Upload multiple images from your device or add image URLs
+              <label className="block text-sm font-semibold mb-2">Images <span className="text-[#B5A89E] text-xs font-normal">({formData.images.length}/{MAX_IMAGES})</span></label>
+              <p className="text-[#9C8577] text-sm mb-4">
+                Upload up to {MAX_IMAGES} images. The first image will be used as the hall cover.
               </p>
 
               {/* File Upload Section */}
-              <div className="mb-6 p-4 border-2 border-dashed border-gray-300 rounded-lg">
+              <div className="mb-6 p-4 border-2 border-dashed border-[#E0D0C1] rounded-lg">
                 <input
                   type="file"
                   id="imageInput"
@@ -292,17 +308,17 @@ function AddHallPage() {
                 <label htmlFor="imageInput" className="block cursor-pointer">
                   <div className="text-center">
                     <div className="text-3xl mb-2">📁</div>
-                    <p className="text-gray-700 font-semibold mb-1">
+                    <p className="text-[#6B4F3A] font-semibold mb-1">
                       Click to select images or drag and drop
                     </p>
-                    <p className="text-gray-500 text-sm">
+                    <p className="text-[#B5A89E] text-sm">
                       Supported formats: JPG, PNG, GIF, WebP (Max 5MB each)
                     </p>
                   </div>
                 </label>
 
                 {selectedFiles.length > 0 && (
-                  <div className="mt-4 pt-4 border-t border-gray-300">
+                  <div className="mt-4 pt-4 border-t border-[#E0D0C1]">
                     <p className="text-sm font-semibold mb-2">
                       Selected files: {selectedFiles.length}
                     </p>
@@ -310,7 +326,7 @@ function AddHallPage() {
                       {selectedFiles.map((file, idx) => (
                         <div
                           key={idx}
-                          className="text-sm text-gray-600 truncate"
+                          className="text-sm text-[#9C8577] truncate"
                         >
                           ✓ {file.name}
                         </div>
@@ -334,7 +350,7 @@ function AddHallPage() {
               {formData.images.length > 0 && (
                 <div className="mb-4">
                   <h3 className="text-sm font-semibold mb-2">
-                    Added Images ({formData.images.length})
+                    Added Images ({formData.images.length}/{MAX_IMAGES})
                   </h3>
                   <div className="grid grid-cols-3 gap-4">
                     {formData.images.map((img, idx) => (
@@ -342,11 +358,14 @@ function AddHallPage() {
                         <img
                           src={img}
                           alt={`Hall ${idx}`}
-                          className="w-full h-24 object-cover rounded"
+                          className={`w-full h-24 object-cover rounded ${idx === 0 ? 'ring-2 ring-[#A0795C]' : ''}`}
                           onError={(e) =>
                             (e.target.src = "https://via.placeholder.com/150")
                           }
                         />
+                        {idx === 0 && (
+                          <span className="absolute bottom-1 left-1 bg-[#A0795C] text-white text-[10px] px-1.5 py-0.5 rounded-full font-medium">Cover</span>
+                        )}
                         <button
                           type="button"
                           onClick={() => handleRemoveImage(idx)}
@@ -364,7 +383,8 @@ function AddHallPage() {
               <button
                 type="button"
                 onClick={handleImageUrlAdd}
-                className="btn-outline w-full"
+                disabled={formData.images.length >= MAX_IMAGES}
+                className={`btn-outline w-full ${formData.images.length >= MAX_IMAGES ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 + Add Image URL
               </button>
@@ -373,9 +393,9 @@ function AddHallPage() {
             <div>
               <label className="block text-sm font-semibold mb-2">
                 Services{" "}
-                <span className="text-gray-500 text-xs">(Optional)</span>
+                <span className="text-[#B5A89E] text-xs">(Optional)</span>
               </label>
-              <p className="text-gray-600 text-sm mb-4">
+              <p className="text-[#9C8577] text-sm mb-4">
                 Add services provided by your hall (e.g., Catering, DJ, Parking,
                 Decoration)
               </p>
@@ -386,13 +406,13 @@ function AddHallPage() {
                     {formData.services.map((service, idx) => (
                       <div
                         key={idx}
-                        className="bg-purple-100 text-purple-800 px-4 py-2 rounded-full flex items-center gap-2"
+                        className="bg-cream text-secondary px-4 py-2 rounded-full flex items-center gap-2"
                       >
                         <span>✓ {service}</span>
                         <button
                           type="button"
                           onClick={() => handleRemoveService(idx)}
-                          className="text-purple-600 hover:text-purple-800 font-semibold"
+                          className="text-primary-dark hover:text-secondary font-semibold"
                         >
                           ×
                         </button>

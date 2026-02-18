@@ -21,7 +21,6 @@ import OwnerProfilePage from "./pages/OwnerProfilePage";
 import FavoritesPage from "./pages/FavoritesPage";
 import OwnerDashboard from "./pages/OwnerDashboard";
 import AddHallPage from "./pages/AddHallPage";
-import EditHallPage from "./pages/EditHallPage";
 import BookingsPage from "./pages/BookingsPage";
 
 function App() {
@@ -47,10 +46,11 @@ function App() {
   const handleLogout = async () => {
     try {
       await authAPI.logout();
-      setUser(null);
-      window.location.href = "/";
     } catch (error) {
       console.error("Logout failed:", error);
+    } finally {
+      setUser(null);
+      window.location.assign("/");
     }
   };
 
@@ -139,16 +139,6 @@ function App() {
                 element={
                   user && user.role === "owner" ? (
                     <AddHallPage />
-                  ) : (
-                    <Navigate to="/login" />
-                  )
-                }
-              />
-              <Route
-                path="/owner/edit-hall/:id"
-                element={
-                  user && user.role === "owner" ? (
-                    <EditHallPage />
                   ) : (
                     <Navigate to="/login" />
                   )

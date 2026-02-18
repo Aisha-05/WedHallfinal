@@ -69,7 +69,7 @@ function StarRating({
             onMouseLeave={() => setHoverRating(0)}
             disabled={!canRate || !user || user.role !== "client" || loading}
             className={`text-2xl transition ${
-              star <= displayRating ? "text-yellow-400" : "text-gray-300"
+              star <= displayRating ? "text-yellow-400" : "text-[#E0D0C1]"
             } ${canRate && user && user.role === "client" && !loading ? "cursor-pointer hover:scale-110" : "cursor-default"}`}
           >
             ★
@@ -79,11 +79,11 @@ function StarRating({
 
       <div className="flex items-center gap-2">
         {averageRating > 0 ? (
-          <span className="font-semibold text-gray-700">
+          <span className="font-semibold text-[#6B4F3A]">
             {averageRating.toFixed(1)}
           </span>
         ) : (
-          <span className="text-sm text-gray-500 italic">
+          <span className="text-sm text-[#B5A89E] italic">
             Hall not rated yet
           </span>
         )}
@@ -98,14 +98,14 @@ function StarRating({
       )}
 
       {canRate && user && user.role === "client" && !userCurrentRating && (
-        <span className="text-xs text-gray-600 font-medium">Click to rate</span>
+        <span className="text-xs text-[#9C8577] font-medium">Click to rate</span>
       )}
 
       {!canRate && user && user.role === "client" && (
-        <span className="text-xs text-gray-500">Approve booking to rate</span>
+        <span className="text-xs text-[#B5A89E]">Approve booking to rate</span>
       )}
 
-      {!user && <span className="text-xs text-gray-500">Login to rate</span>}
+      {!user && <span className="text-xs text-[#B5A89E]">Login to rate</span>}
     </div>
   );
 }

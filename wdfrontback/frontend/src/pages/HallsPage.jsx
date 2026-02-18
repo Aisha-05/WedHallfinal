@@ -76,7 +76,7 @@ function HallsPage() {
         {/* Header */}
         <div className="mb-12">
           <h1 className="text-4xl font-bold mb-4">Wedding Halls</h1>
-          <p className="text-gray-600 text-lg">
+          <p className="text-[#9C8577] text-lg">
             Browse and book from our collection of beautiful wedding venues
           </p>
         </div>
@@ -123,7 +123,7 @@ function HallsPage() {
           </div>
         ) : filteredHalls.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-gray-600 text-lg">
+            <p className="text-[#9C8577] text-lg">
               No halls found matching your criteria.
             </p>
           </div>
